@@ -10,8 +10,8 @@ mod tests {
         let optional_target = Some(target);
 
         // TODO: Make this an if-let statement whose value is `Some`.
-        word = optional_target {
-            assert_eq!(word, target);
+       if let  word = optional_target {
+            assert_eq!(word.unwrap(), target);
         }
     }
 
@@ -29,11 +29,13 @@ mod tests {
         // TODO: Make this a while-let statement. Remember that `Vec::pop()`
         // adds another layer of `Option`. You can do nested pattern matching
         // in if-let and while-let statements.
-        integer = optional_integers.pop() {
-            assert_eq!(integer, cursor);
-            cursor -= 1;
-        }
+        while let Some(ops) = optional_integers.pop() {
+            if let Some(integer) = ops {
+                assert_eq!(integer, cursor);
+                cursor -= 1;
+            }
 
+        }
         assert_eq!(cursor, 0);
     }
 }
